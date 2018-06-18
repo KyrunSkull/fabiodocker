@@ -1,32 +1,11 @@
--# Use o mais recente jboss / base-jdk: 8 imagens como base	
--FROM jboss / base-jdk: 8	
--	
--# Configure a variável env do WILDFLY_VERSION	
-ENV WILDFLY_VERSION 13.0.0.Final	
-ENV WILDFLY_SHA1 3d63b72d9479fea0e3462264dd2250ccd96435f9	
-ENV JBOSS_HOME / opt / jboss / wildfly	
-	
-Raiz do USUÁRIO	
-	
-# Adicione a distribuição do WildFly para / opt e torne o wildfly o proprietário do conteúdo de tar extraído	
-# Certifique-se de que a distribuição esteja disponível em um local conhecido	
-EXECUTAR cd $ HOME \	
-    && curl -O https://download.jboss.org/wildfly/$WILDFLY_VERSION/wildfly-$WILDFLY_VERSION.tar.gz \	
-    && sha1sum wildfly- $ WILDFLY_VERSION.tar.gz | grep $ WILDFLY_SHA1 \	
-    && tar xf wildfly- $ WILDFLY_VERSION.tar.gz \	
-    && mv $ HOME / wildfly- $ WILDFLY_VERSION $ JBOSS_HOME \	
-    && rm wildfly- $ WILDFLY_VERSION.tar.gz \	
-    && chown -R jboss: 0 $ {JBOSS_HOME} \	
-    && chmod -R g + rw $ {JBOSS_HOME}	
-	
-# Assegure-se de que os sinais sejam encaminhados para o processo da JVM corretamente para um desligamento normal	
-ENV LAUNCH_JBOSS_IN_BACKGROUND true	
-	
-USER jboss	
-	
-# Exponha as portas em que estamos interessados	
-EXPOSE 8080	
-	
-# Definir o comando padrão para executar na inicialização	
-# Isso inicializará o WildFly no modo autônomo e se ligará a todas as interfaces	
-CMD [ "/opt/jboss/wildfly/bin/standalone.sh" , "-b" , "0.0.0.0" ]
+FROM debian
+
+MAINTAINER Flavio Silveira
+
+RUN apt-get update
+RUN apt-get install -y nginx
+RUN apt-get install -y php5-fpm
+
+COPY default /etc/nginx/sites-available/default
+
+CMD service nginx start && service php5-fpm start && /bin/bash
