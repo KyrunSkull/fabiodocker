@@ -1,6 +1,6 @@
 FROM debian
 
-MAINTAINER Flavio Silveira
+MAINTAINER Fabio Siqueira <fabiojr2705@gmail.com>
 
 RUN apt-get update
 RUN apt-get install -y nginx
