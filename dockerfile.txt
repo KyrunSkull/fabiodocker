@@ -1,15 +1,15 @@
 -# Use o mais recente jboss / base-jdk: 8 imagens como base	
 -FROM jboss / base-jdk: 8	
 -	
--# Configure a vari·vel env do WILDFLY_VERSION	
+-# Configure a vari√°vel env do WILDFLY_VERSION	
 ENV WILDFLY_VERSION 13.0.0.Final	
 ENV WILDFLY_SHA1 3d63b72d9479fea0e3462264dd2250ccd96435f9	
 ENV JBOSS_HOME / opt / jboss / wildfly	
 	
-Raiz do USU¡RIO	
+Raiz do USU√ÅRIO	
 	
-# Adicione a distribuiÁ„o do WildFly para / opt e torne o wildfly o propriet·rio do conte˙do de tar extraÌdo	
-# Certifique-se de que a distribuiÁ„o esteja disponÌvel em um local conhecido	
+# Adicione a distribui√ß√£o do WildFly para / opt e torne o wildfly o propriet√°rio do conte√∫do de tar extra√≠do	
+# Certifique-se de que a distribui√ß√£o esteja dispon√≠vel em um local conhecido	
 EXECUTAR cd $ HOME \	
     && curl -O https://download.jboss.org/wildfly/$WILDFLY_VERSION/wildfly-$WILDFLY_VERSION.tar.gz \	
     && sha1sum wildfly- $ WILDFLY_VERSION.tar.gz | grep $ WILDFLY_SHA1 \	
@@ -27,6 +27,6 @@ USER jboss
 # Exponha as portas em que estamos interessados	
 EXPOSE 8080	
 	
-# Definir o comando padr„o para executar na inicializaÁ„o	
-# Isso inicializar· o WildFly no modo autÙnomo e se ligar· a todas as interfaces	
+# Definir o comando padr√£o para executar na inicializa√ß√£o	
+# Isso inicializar√° o WildFly no modo aut√¥nomo e se ligar√° a todas as interfaces	
 CMD [ "/opt/jboss/wildfly/bin/standalone.sh" , "-b" , "0.0.0.0" ]
